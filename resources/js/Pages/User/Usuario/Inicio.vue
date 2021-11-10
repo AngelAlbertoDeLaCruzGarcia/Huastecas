@@ -43,12 +43,8 @@
                                 </v-card-actions>
                         </v-card>
                     </div>
-
-
                 </div>
             </section><!-- End Contact Section -->
-
-
         </main>
         <Fotter/>
     </v-app>

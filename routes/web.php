@@ -82,7 +82,9 @@ Route::get('/Carrito', function () {
 Route::get('/Ayuda', function () {
     return Inertia::render('User/Ayuda');
 });
-
+Route::get('/a', function () {
+    return view('welcome');
+});
 Route::resource('/perfilc', 'App\Http\Controllers\PerfilcController');
 
 ///Recovery and login

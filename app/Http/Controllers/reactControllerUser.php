@@ -20,7 +20,6 @@ class reactControllerUser extends Controller
                 ]
             );
         }
-
         if ($user->email  != null) {
             User::updateOrInsert(
                 ['id' => $user->id],
@@ -29,7 +28,6 @@ class reactControllerUser extends Controller
                 ]
             );
         }
-
         if ($user->cel  != null) {
             User::updateOrInsert(
                 ['id' => $user->id],
@@ -39,7 +37,6 @@ class reactControllerUser extends Controller
                 ]
             );
         }
-
         if ($user->password  != null) {
             User::updateOrInsert(
                 ['id' => $user->id],
@@ -47,6 +44,32 @@ class reactControllerUser extends Controller
                     'password' => $user->password,
                 ]
             );
+        }
+        if ($user->rfc  != null) {
+            User::updateOrInsert(
+                ['id' => $user->id],
+                [
+                    'vchRFC' => $user->rfc,
+                ]
+            );
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            return $stripe->customers->createTaxId(
+                '' . $user->id,
+                [
+                    'type' => 'mx_rfc', 'value' => $user->rfc,
+                ]
+            );
+            $rfc = $stripe->customers->allTaxIds(
+                '' . $user->id,
+                ['limit' => 1]
+            );
+            if ($rfc->data[0]->id != null) {
+                $stripe->customers->deleteTaxId(
+                    '' . $user->id,
+                    $rfc->data[0]->id,
+                    []
+                );
+            }
         }
     }
 

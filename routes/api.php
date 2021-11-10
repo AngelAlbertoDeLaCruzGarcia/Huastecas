@@ -23,6 +23,11 @@ Route::post('/orders', 'App\Http\Controllers\OrdersControllerApi@Orders');
 Route::get('/orders', 'App\Http\Controllers\OrdersControllerApi@index');
 Route::get('/order', 'App\Http\Controllers\OrdersControllerApi@order');
 
+///Facturacion
+Route::post('/invoice', 'App\Http\Controllers\InvoiceController@facturar');
+Route::get('/invoice', 'App\Http\Controllers\InvoiceController@show');
+Route::get('/invoice2', 'App\Http\Controllers\InvoiceController@index2');
+
 ///Notifications
 Route::get('/noti', 'App\Http\Controllers\NotificationControllerApi@index2');
 Route::post('/notifications', 'App\Http\Controllers\NotificationControllerApi@index');
