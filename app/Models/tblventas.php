@@ -18,6 +18,7 @@ class tblventas extends Model
         'intDireccion_id',
         'created_at',
         'updated_at',
+        'vchIdFactura',
     ];
     public $timestamps = false;
 

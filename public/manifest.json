@@ -1,0 +1,46 @@
+{
+    "name": "Indumentaria Tipica de las Huastecas",
+    "short_name": "Huastecas",
+    "start_url": "./index.php",
+    "background_color": "#8BC34A",
+    "description": "E-comerce de Indumentarias",
+    "display": "fullscreen",
+    "theme_color": "#8BC34A",
+    "icons": [
+        {
+            "src": "./assets/img/Logos/512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/img/Logos/256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/img/Logos/192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/img/Logos/144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },        
+        {
+            "src": "./assets/img/Logos/96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/img/Logos/512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/img/Logos/48.png",
+            "sizes": "48x48",
+            "type": "image/png"    
+        }
+    ]
+}

@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-main3',
-        'version' => 'dev-main3',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c858ff6da581fc94538a95692e7fb4093d3207cb',
+        'reference' => '0a43d65d87528cc07cdd923d57280558aec10c1e',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -503,12 +503,12 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-main3',
-            'version' => 'dev-main3',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c858ff6da581fc94538a95692e7fb4093d3207cb',
+            'reference' => '0a43d65d87528cc07cdd923d57280558aec10c1e',
             'dev_requirement' => false,
         ),
         'laravel/sanctum' => array(
@@ -1119,12 +1119,12 @@
             'dev_requirement' => false,
         ),
         'stripe/stripe-php' => array(
-            'pretty_version' => 'v7.92.0',
-            'version' => '7.92.0.0',
+            'pretty_version' => 'v7.97.0',
+            'version' => '7.97.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../stripe/stripe-php',
             'aliases' => array(),
-            'reference' => '4b549e6f7d3e7ffd877547a0f1e8bd01c363e268',
+            'reference' => 'ae41c309ce113362706f8d5f19cf0cf2c730bc4a',
             'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(
