@@ -1,214 +1,237 @@
 <template>
-<v-app>
-    <Head :errors="errors" />
-    <!-- ======= Hero Section ======= -->
-    <section id="hero2" style="padding: 45px 0;">
-        <div class="hero-container" data-aos="fade-up"></div>
-    </section>
-
-    <main id="main">
-        <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
-            <div class="container">
-                <div
-                    class="section-title"
-                    data-aos="fade-in"
-                    data-aos-delay="100"
-                >
-                    <p v-if="checar">
+    <v-app id="inspire">
+        <Head :errors="errors" />
+        <v-main v-bind:style="{ 'background-color': this.$store.state.fondo }">
+            <v-container style="margin-top:0%;">
+                <v-row>
+                    <p v-if="nombre === '1'">
+                        Resultados de: <strong>Caballero</strong>
+                    </p>
+                    <p v-else-if="nombre === '2'">
+                        Resultados de: <strong>Dama</strong>
+                    </p>
+                    <p v-else-if="nombre === '3'">
+                        Resultados de: <strong>Infantil</strong>
+                    </p>
+                    <p v-else-if="nombre === '4'">
+                        Resultados de: <strong>Unisex</strong>
+                    </p>
+                    <p v-else>
                         Resultados de: <strong>{{ nombre }}</strong>
                     </p>
-                </div>
-
-                <div class="row portfolio-container" data-aos="fade-up">
-                    <div v-for="prod in prods" :key="prod.intIDProd">
-                        <ul v-if="prod.intIdCat == 1">
-                            <div class="portfolio-item filter-c">
-                                <inertia-link
-                                    :href="`/Inicio/${prod.intIDProd}`"
-                                >
+                </v-row>
+                <v-row>
+                    <v-col v-for="prod in prods" :key="prod.intIDProd" cols="4">
+                        <div v-if="prod.intIdCat == 1">
+                            <inertia-link
+                                :href="`/Inicio/${prod.intIDProd}`"
+                                :name="`${prod.intIDProd}`"
+                                style="text-decoration:none"
+                            >
+                                <v-hover v-slot="{ hover }">
                                     <v-card
                                         class="mx-auto"
-                                        max-width="350"
+                                        max-width="400"
+                                        max-height="400"
+                                        elevation="18"
                                         hover="true"
                                     >
                                         <v-img
-                                            class="white--text align-end"
+                                            class="indigo--text align-end"
                                             height="200px"
                                             :src="`${prod.vchImg}`"
-                                        >
-                                        </v-img>
-                                        <v-card-title>{{
-                                            prod.vchProd
-                                        }}</v-card-title>
-                                        <v-card-subtitle class="pb-0">
+                                        />
+                                        <v-card-text>
+                                            <div>
+                                                <h2>${{ prod.fltPrecio }}</h2>
+                                            </div>
+                                            <div class="single-line">
+                                                <h3>
+                                                    {{ prod.vchProd }}
+                                                </h3>
+                                            </div>
+                                        </v-card-text>
+                                        <v-card-subtitle>
                                             Caballero
                                         </v-card-subtitle>
-
-                                        <v-card-text class="text--primary">
-                                            <div>
-                                                <strong
-                                                    >${{
-                                                        prod.fltPrecio
-                                                    }}</strong
+                                        <v-expand-transition>
+                                            <v-card
+                                                v-if="hover"
+                                                class="transition-fast-in-fast-out success v-card--reveal"
+                                                style="height: 100%;"
+                                            >
+                                                <v-card-text
+                                                    class="white--text"
                                                 >
-                                            </div>
-
-                                            <div>{{ prod.vchDesc }}</div>
-                                        </v-card-text>
-
-                                        <v-card-actions>
-                                            <v-btn color="success">
-                                                Comprar
-                                            </v-btn>
-                                        </v-card-actions>
+                                                    <h1>Descripción</h1>
+                                                    <br />
+                                                    <p>{{ prod.vchDesc }}</p>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-expand-transition>
                                     </v-card>
-                                </inertia-link>
-                            </div>
-                        </ul>
-                        <ul v-if="prod.intIdCat == 2">
-                            <div class="portfolio-item filter-d">
-                                <inertia-link
-                                    :href="`/Inicio/${prod.intIDProd}`"
-                                >
+                                </v-hover>
+                            </inertia-link>
+                        </div>
+
+                        <div v-if="prod.intIdCat == 2">
+                            <inertia-link
+                                :href="`/Inicio/${prod.intIDProd}`"
+                                :name="`${prod.intIDProd}`"
+                                style="text-decoration:none"
+                            >
+                                <v-hover v-slot="{ hover }">
                                     <v-card
                                         class="mx-auto"
-                                        max-width="350"
+                                        max-width="400"
+                                        elevation="18"
                                         hover="true"
                                     >
                                         <v-img
-                                            class="white--text align-end"
+                                            class="indigo--text align-end"
                                             height="200px"
                                             :src="`${prod.vchImg}`"
-                                        >
-                                        </v-img>
-                                        <v-card-title>{{
-                                            prod.vchProd
-                                        }}</v-card-title>
-
-                                        <v-card-subtitle class="pb-0">
+                                        />
+                                        <v-card-text>
+                                            <div>
+                                                <h2>${{ prod.fltPrecio }}</h2>
+                                            </div>
+                                            <div class="single-line">
+                                                <h3>
+                                                    {{ prod.vchProd }}
+                                                </h3>
+                                            </div>
+                                        </v-card-text>
+                                        <v-card-subtitle>
                                             Dama
                                         </v-card-subtitle>
-
-                                        <v-card-text class="text--primary">
-                                            <div>
-                                                <strong
-                                                    >${{
-                                                        prod.fltPrecio
-                                                    }}</strong
+                                        <v-expand-transition>
+                                            <v-card
+                                                v-if="hover"
+                                                class="transition-fast-in-fast-out success v-card--reveal"
+                                                style="height: 100%;"
+                                            >
+                                                <v-card-text
+                                                    class="white--text"
                                                 >
-                                            </div>
-
-                                            <div>{{ prod.vchDesc }}</div>
-                                        </v-card-text>
-
-                                        <v-card-actions>
-                                            <v-btn color="success">
-                                                Comprar
-                                            </v-btn>
-                                        </v-card-actions>
+                                                    <h1>Descripción</h1>
+                                                    <br />
+                                                    <p>{{ prod.vchDesc }}</p>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-expand-transition>
                                     </v-card>
-                                </inertia-link>
-                            </div>
-                        </ul>
-                        <ul v-if="prod.intIdCat == 3">
-                            <div
-                                class="portfolio-item filter-n"
-                                hover="true"
+                                </v-hover>
+                            </inertia-link>
+                        </div>
+
+                        <div v-if="prod.intIdCat == 3">
+                            <inertia-link
+                                :href="`/Inicio/${prod.intIDProd}`"
+                                :name="`${prod.intIDProd}`"
+                                style="text-decoration:none"
                             >
-                                <inertia-link
-                                    :href="`/Inicio/${prod.intIDProd}`"
-                                >
-                                    <v-card class="mx-auto" max-width="350">
+                                <v-hover v-slot="{ hover }">
+                                    <v-card
+                                        class="mx-auto"
+                                        max-width="400"
+                                        elevation="18"
+                                        hover="true"
+                                    >
                                         <v-img
-                                            class="white--text align-end"
+                                            class="indigo--text align-end"
                                             height="200px"
                                             :src="`${prod.vchImg}`"
-                                        >
-                                        </v-img>
-                                        <v-card-title>{{
-                                            prod.vchProd
-                                        }}</v-card-title>
-
-                                        <v-card-subtitle class="pb-0">
+                                        />
+                                        <v-card-text>
+                                            <div>
+                                                <h2>${{ prod.fltPrecio }}</h2>
+                                            </div>
+                                            <div class="single-line">
+                                                <h3>
+                                                    {{ prod.vchProd }}
+                                                </h3>
+                                            </div>
+                                        </v-card-text>
+                                        <v-card-subtitle>
                                             Infantil
                                         </v-card-subtitle>
-
-                                        <v-card-text class="text--primary">
-                                            <div>
-                                                <strong
-                                                    >${{
-                                                        prod.fltPrecio
-                                                    }}</strong
+                                        <v-expand-transition>
+                                            <v-card
+                                                v-if="hover"
+                                                class="transition-fast-in-fast-out success v-card--reveal"
+                                                style="height: 100%;"
+                                            >
+                                                <v-card-text
+                                                    class="white--text"
                                                 >
-                                            </div>
-
-                                            <div>{{ prod.vchDesc }}</div>
-                                        </v-card-text>
-
-                                        <v-card-actions>
-                                            <v-btn color="success">
-                                                Comprar
-                                            </v-btn>
-                                        </v-card-actions>
+                                                    <h1>Descripción</h1>
+                                                    <br />
+                                                    <p>{{ prod.vchDesc }}</p>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-expand-transition>
                                     </v-card>
-                                </inertia-link>
-                            </div>
-                        </ul>
-                        <ul v-if="prod.intIdCat == 4">
-                            <div
-                                class="portfolio-item filter-n"
-                                hover="true"
+                                </v-hover>
+                            </inertia-link>
+                        </div>
+
+                        <div v-if="prod.intIdCat == 4">
+                            <inertia-link
+                                :href="`/Inicio/${prod.intIDProd}`"
+                                :name="`${prod.intIDProd}`"
+                                style="text-decoration:none"
                             >
-                                <inertia-link
-                                    :href="`/Inicio/${prod.intIDProd}`"
-                                >
-                                    <v-card class="mx-auto" max-width="350">
+                                <v-hover v-slot="{ hover }">
+                                    <v-card
+                                        class="mx-auto"
+                                        max-width="400"
+                                        elevation="18"
+                                        hover="true"
+                                    >
                                         <v-img
-                                            class="white--text align-end"
+                                            class="indigo--text align-end"
                                             height="200px"
                                             :src="`${prod.vchImg}`"
-                                        >
-                                        </v-img>
-                                        <v-card-title>{{
-                                            prod.vchProd
-                                        }}</v-card-title>
-
-                                        <v-card-subtitle class="pb-0">
+                                        />
+                                        <v-card-text>
+                                            <div>
+                                                <h2>${{ prod.fltPrecio }}</h2>
+                                            </div>
+                                            <div class="single-line">
+                                                <h3>
+                                                    {{ prod.vchProd }}
+                                                </h3>
+                                            </div>
+                                        </v-card-text>
+                                        <v-card-subtitle>
                                             Unisex
                                         </v-card-subtitle>
-
-                                        <v-card-text class="text--primary">
-                                            <div>
-                                                <strong
-                                                    >${{
-                                                        prod.fltPrecio
-                                                    }}</strong
+                                        <v-expand-transition>
+                                            <v-card
+                                                v-if="hover"
+                                                class="transition-fast-in-fast-out success v-card--reveal"
+                                                style="height: 100%;"
+                                            >
+                                                <v-card-text
+                                                    class="white--text"
                                                 >
-                                            </div>
-
-                                            <div>{{ prod.vchDesc }}</div>
-                                        </v-card-text>
-
-                                        <v-card-actions>
-                                            <v-btn color="success">
-                                                Comprar
-                                            </v-btn>
-                                        </v-card-actions>
+                                                    <h1>Descripción</h1>
+                                                    <br />
+                                                    <p>{{ prod.vchDesc }}</p>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-expand-transition>
                                     </v-card>
-                                </inertia-link>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Portfolio Section -->
-    </main>
-    <!-- End #main -->
-
-    <Fotter />
-</v-app>
+                                </v-hover>
+                            </inertia-link>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-main>
+        <Fotter />
+    </v-app>
 </template>
 
 <script>
@@ -229,11 +252,7 @@ export default {
         return {};
     },
 
-    methods: {
-        checar() {
-            alert(this.prods);
-        }
-    },
+    methods: {},
 
     components: {
         Fotter,
@@ -242,3 +261,12 @@ export default {
     }
 };
 </script>
+
+<style>
+.v-card--reveal {
+    bottom: 0;
+    opacity: 1 !important;
+    position: absolute;
+    width: 100%;
+}
+</style>

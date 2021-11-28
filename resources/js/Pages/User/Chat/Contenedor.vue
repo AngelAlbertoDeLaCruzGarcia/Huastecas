@@ -1,97 +1,117 @@
 <template>
     <v-app>
-
-        <Head :errors="errors"/>
+        <Head :errors="errors" />
         <!-- ======= Hero Section ======= -->
-          <section id="hero2" style="padding: 45px 0;">
-            <div class="hero-container" data-aos="fade-up">
-
-            </div>
+        <section id="hero2" style="padding: 45px 0;">
+            <div class="hero-container" data-aos="fade-up"></div>
         </section>
 
         <main id="main">
-
             <section id="about" class="about" style="padding: -30px 0;">
-                    <div class="container">
-                        <div class="py-12">
-                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                <v-card>
-                                    <div v-if="this.$store.state.auth">
-                                        <message-container :messages="messages"/>
-                                        <input-message :room="currentRoom"
-                                            v-on:messagesent="getMessages()"
-                                        />
-                                    </div>
-                                    <div v-if="!this.$store.state.auth">
-                                        <h1 style="padding:30%;">Necesitas Iniciar Sesion</h1>
-                                    </div>
-
-                                </v-card>
-                            </div>
+                <div class="container">
+                    <div class="py-12">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <v-card>
+                                <div v-if="this.$store.state.auth">
+                                    <message-container :messages="messages" />
+                                    <input-message
+                                        :room="currentRoom"
+                                        v-on:messagesent="getMessages()"
+                                    />
+                                </div>
+                                <div v-if="!this.$store.state.auth">
+                                    <h1 style="padding:30%;">
+                                        Necesitas Iniciar Sesion
+                                    </h1>
+                                </div>
+                            </v-card>
                         </div>
-
                     </div>
+                </div>
             </section>
-
         </main>
-        <Fotter/>
+        <Fotter />
     </v-app>
 </template>
 
 <script>
-import inputMessage from './inputMessage'
-import messageContainer from './messageContainer'
-import Fotter from '../Fotter'
-import Head from '../Head'
+import inputMessage from "./inputMessage";
+import messageContainer from "./messageContainer";
+import Fotter from "../Fotter";
+import Head from "../Head";
 export default {
-    metaInfo: { title: 'Chat' },
+    metaInfo: { title: "Chat" },
     ///props:['prods'],
-    props:{
-        errors: Object,
+    props: {
+        errors: Object
     },
-    data () {
-      return {
-          chatRooms:[],
-          currentRoom:[],
-          messages:[],
-
-      }
+    data() {
+        return {
+            chatRooms: [],
+            currentRoom: [],
+            messages: [],
+            contador: 0
+        };
     },
 
     methods: {
-        getRooms(){
-            axios.get('/chat/rooms')
-            .then( response => {
-                this.chatRooms = response.data;
-                this.setRoom(response.data[0]);
-            })
-            .catch( error => {
-                console.log(error);
-            })
+        getRooms() {
+            axios
+                .get("/chat/rooms")
+                .then(response => {
+                    this.chatRooms = response.data;
+                    this.setRoom(response.data[0]);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
-        setRoom(room){
-            this.currentRoom= room;
+        setRoom(room) {
+            this.currentRoom = room;
             this.getMessages();
         },
-        getMessages:function(){
-                axios.get('/chat/room/'+this.currentRoom.id+'/messages')
-                .then( response => {
+        getMessages() {
+            axios
+                .get("/chat/room/" + this.currentRoom.id + "/messages")
+                .then(response => {
+                    if (
+                        this.messages.length != response.data.length &&
+                        this.messages.length != 0
+                    ) {
+                        if (
+                            response.data[response.data.length - 1].user.id !=
+                            this.$store.state.datosUsuario.name
+                        ) {
+                            this.noti(
+                                "Nuevo mensaje",
+                                response.data[response.data.length - 1].user
+                                    .name
+                            );
+                        }
+                    }
                     this.messages = response.data;
                 })
-                .catch( error => {
+                .catch(error => {
                     console.log(error);
-                })
-
+                });
         },
-                mensaje:function(){
-
-        alert("hola desde javascript");
-
+        mensaje: function() {
+            alert(this.messages.length);
+        },
+        noti(titulo = "Notificaciones de prueba", body = "body") {
+            var options = {
+                body: body,
+                icon: "/assets/img/Logos/512.png"
+            };
+            var n = new Notification(titulo, options);
+            ///setTimeout(n.close.bind(n), 5000);
         }
     },
-    created(){
+    created() {
         this.getRooms();
-        setInterval(() => {this.getMessages()},5000)
+        setInterval(() => {
+            this.getMessages();
+        }, 5000);
         //setInterval(this.mensaje(),3000);
     },
 
@@ -100,7 +120,6 @@ export default {
         Head,
         inputMessage,
         messageContainer
-    },
-}
+    }
+};
 </script>
-
