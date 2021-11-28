@@ -9,9 +9,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response as ResponseFactory;
+use Illuminate\Support\Traits\Macroable;
 
 class Response implements Responsable
 {
+    use Macroable;
+
     protected $component;
     protected $props;
     protected $rootView;
@@ -75,6 +78,13 @@ class Response implements Responsable
                 $prop = $prop->toArray();
             }
         });
+
+        foreach ($props as $key => $value) {
+            if (str_contains($key, '.')) {
+                Arr::set($props, $key, $value);
+                unset($props[$key]);
+            }
+        }
 
         $page = [
             'component' => $this->component,
