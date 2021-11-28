@@ -17,20 +17,20 @@ class InvoiceController extends Controller
             ///return $datos;
             \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-            for ($x = 0; $x < count($datos->products); $x++) {
+            foreach ($datos->products as $product) {
                 $prod = \Stripe\Product::create([
-                    'name' => $datos->products[$x]["vchProd"],
+                    'name' => $product["vchProd"],
                     'shippable' => true
                 ]);
                 $price = \Stripe\Price::create([
                     'product' => $prod->id,
-                    'unit_amount' => $datos->products[$x]["fltPrecio"] * 100,
+                    'unit_amount' => $product["fltPrecio"] * 100,
                     'currency' => 'mxn',
                 ]);
                 $item = \Stripe\InvoiceItem::create([
                     'customer' => $datos->cliente,
                     'price' => $price->id,
-                    'quantity' => '' . $datos->products[$x]["intCant"]
+                    'quantity' => '' . $product["intCant"]
                 ]);
             }
             ///Crear factura
@@ -41,6 +41,7 @@ class InvoiceController extends Controller
             //////Enviar Factura
             ///return $invoice;
             $send = \Stripe\Invoice::retrieve($invoice->id);
+            $invoice = $send;
             $send->finalizeInvoice();
             tblventas::updateOrInsert(
                 ['intIdVenta' => '' . $datos->idventa],
@@ -48,7 +49,7 @@ class InvoiceController extends Controller
                     'vchIdFactura' =>  $invoice->id,
                 ]
             );
-            return $send;
+            return $invoice;
         } catch (\Exception $e) {
             return $e;
         }

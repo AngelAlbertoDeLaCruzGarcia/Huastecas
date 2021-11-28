@@ -16,7 +16,11 @@
                     <v-list-item-avatar color="grey darken-3">
                         <v-img
                             class="elevation-6"
-                            :src="`${message.user.profile_photo_url}`"
+                            :src="
+                                message.user.profile_photo_path
+                                    ? `${message.user.profile_photo_path}`
+                                    : `${message.user.profile_photo_url}`
+                            "
                         />
                     </v-list-item-avatar>
                     <v-list-item-content>

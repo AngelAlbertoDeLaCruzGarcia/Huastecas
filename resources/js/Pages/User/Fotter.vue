@@ -1,137 +1,232 @@
 <template>
-<div>
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="footer-top" style="padding: 23px 0 0px 0;">
-            <div class="container">
-                <div class="row">
+    <div>
+        <!-- ======= Footer ======= -->
+        <v-footer class="indigo lighten-1" padless>
+            <v-row justify="center" class="white--text" no-gutters>
+                <div style="padding: 23px 0 0px 0;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-2">
+                                <v-card class="text-center" elevation="18">
+                                    <h3>Indumentarias</h3>
+                                    <p class="pb-3">
+                                        <em
+                                            >La mejor calidad en ropa de la
+                                            Huasteca</em
+                                        >
+                                    </p>
+                                    <p>
+                                        Calle Nueva <br />
+                                        Huejutla de Reyes<br /><br />
+                                        <strong>Telefono:</strong
+                                        >7716838276<br />
+                                        <strong>Email:</strong>
+                                        indumentariash@gmail.com<br />
+                                    </p>
+                                    <div>
+                                        <v-btn color="#2196F3" fab x-small dark>
+                                            <v-icon>mdi-twitter</v-icon>
+                                        </v-btn>
+                                        <v-btn color="primary" fab x-small dark>
+                                            <v-icon>mdi-facebook</v-icon>
+                                        </v-btn>
+                                        <v-btn color="red" fab x-small dark>
+                                            <v-icon>mdi-instagram</v-icon>
+                                        </v-btn>
+                                        <v-btn color="success" fab x-small dark>
+                                            <v-icon>mdi-whatsapp</v-icon>
+                                        </v-btn>
+                                        <v-btn color="primary" fab x-small dark>
+                                            <v-icon>mdi-linkedin</v-icon>
+                                        </v-btn>
+                                    </div>
+                                </v-card>
+                            </div>
 
-                    <div class="col-lg-4 col-md-4">
-                        <div class="footer-info" data-aos="fade-up" data-aos-delay="50">
-                            <h3>Indumentarias</h3>
-                            <p class="pb-3"><em>La mejor calidad en ropa de la Huasteca</em></p>
-                            <p>
-                                Calle Nueva <br>
-                                Huejutla de Reyes<br><br>
-                                <strong>Telefono:</strong>7716838276<br>
-                                <strong>Email:</strong> indumentariash@gmail.com<br>
-                            </p>
-                            <div class="social-links mt-3">
-                                <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-                                <a href="#" class="google-plus"><i class="icofont-skype"></i></a>
-                                <a href="#" class="linkedin"><i class="icofont-telegram"></i></a>
+                            <div class="col-lg-2 col-md-6 footer-links">
+                                <h4>Navegacion</h4>
+                                <a
+                                    href="/"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Inicio</a
+                                >
+                                <br />
+                                <a
+                                    href="/Acerca"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Acerca de</a
+                                >
+                                <br />
+                                <a
+                                    href="/Carrito"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Carrito</a
+                                >
+                                <br />
+                                <a
+                                    href="/chat"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Chat</a
+                                >
+                                <br />
+                                <li v-if="this.$store.state.auth == true">
+                                    <v-form
+                                        @submit.prevent="cerrarSesion"
+                                        ref="form"
+                                    >
+                                        <button
+                                            type="submit"
+                                            style="backgroud-color:white; color:white;"
+                                        >
+                                            Cerrar sesion
+                                        </button>
+                                    </v-form>
+                                </li>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 footer-links">
+                                <h4>Categorias</h4>
+                                <a
+                                    :href="`/bprod?p=2`"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Dama</a
+                                >
+                                <br />
+                                <a
+                                    :href="`/bprod?p=1`"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Caballero</a
+                                >
+                                <br />
+                                <a
+                                    :href="`/bprod?p=3`"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Niño</a
+                                >
+                                <br />
+                                <a
+                                    :href="`/bprod?p=Camisa`"
+                                    style="color:black; text-decoration:none"
+                                    >>&nbsp;Camisas</a
+                                >
+                                <v-list
+                                    dark
+                                    style="color:black; text-decoration:none"
+                                >
+                                    <v-list-group :value="false">
+                                        <template v-slot:activator>
+                                            <v-list-item-title
+                                                >Mas...</v-list-item-title
+                                            >
+                                        </template>
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <a
+                                                    :href="`/bprod?p=Conjunto`"
+                                                    style="color:white; text-decoration:none"
+                                                    >>&nbsp;Conjuntos</a
+                                                >
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <a
+                                                    :href="`/bprod?p=Blusa`"
+                                                    style="color:white; text-decoration:none"
+                                                    >>&nbsp;Blusas</a
+                                                >
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <a
+                                                    :href="`/bprod?p=Cubreboca`"
+                                                    style="color:white; text-decoration:none"
+                                                    >>&nbsp;Cubrebocas</a
+                                                >
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <a
+                                                    :href="`/bprod?p=Traje`"
+                                                    style="color:white; text-decoration:none"
+                                                    >>&nbsp;Trajes</a
+                                                >
+                                            </v-list-item-title>
+                                        </v-list-item>
+
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <a
+                                                    :href="`/bprod?p=Huarache`"
+                                                    style="color:white; text-decoration:none"
+                                                    >>&nbsp;Huaraches</a
+                                                >
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title>
+                                                <a
+                                                    :href="`/bprod?p=Tenis`"
+                                                    style="color:white; text-decoration:none"
+                                                    >>&nbsp;Tenis</a
+                                                >
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                    </v-list-group>
+                                </v-list>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 footer-newsletter">
+                                <h4>Suscribete</h4>
+                                <p>
+                                    Para que puedas recibir ofertas, descuentos,
+                                    sorpresas y mucho mas
+                                </p>
+                                <form style="color:white" action="">
+                                    <input
+                                        style="color:white"
+                                        type="email"
+                                        placeholder="correo@ejemplo.com"
+                                        name="email"
+                                    />
+                                    <v-btn color="success" type="submit">
+                                        Suscribete
+                                    </v-btn>
+                                </form>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="150">
-                        <h4>Navegacion</h4>
-                        <ul>
-                        <li><a href="/">>&nbsp;Inicio</a></li>
-                        <li><a href="/Acerca">>&nbsp;Acerca de</a></li>
-                        <li><a href="/Carrito">>&nbsp;Carrito</a></li>
-                        <li v-if="this.$store.state.auth==false"><a href="#" style="color:white;" data-toggle="modal" data-target="#loginModal">Iniciar sesion</a></li>
-                        <li v-if="this.$store.state.auth==false"><a href="#" style="color:white;" data-toggle="modal" data-target="#registrarModal">Registrarse</a></li>
-                        <li v-if="this.$store.state.auth==true">
-                            <v-form @submit.prevent="cerrarSesion" ref="form">
-                                <button type="submit" style="backgroud-color:white; color:white;">Cerrar sesion</button>
-                            </v-form>
-                        </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="250">
-                        <h4>Categorias</h4>
-                        <ul>
-                            <li><a :href="`/bprod?p=2`">>&nbsp;Dama</a></li>
-                            <li><a :href="`/bprod?p=1`">>&nbsp;Caballero</a></li>
-                            <li><a :href="`/bprod?p=3`">>&nbsp;Niño</a></li>
-                            <li><a :href="`/bprod?p=Camisa`">>&nbsp;Camisas</a></li>
-                            <v-list dark>
-                                <v-list-group :value="false">
-                                    <template v-slot:activator>
-                                        <v-list-item-title>Mas...</v-list-item-title>
-                                    </template>
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                        <li><a :href="`/bprod?p=Conjunto`">>&nbsp;Conjuntos</a></li>
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                            <li><a :href="`/bprod?p=Blusa`">>&nbsp;Blusas</a></li>
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                            <li><a :href="`/bprod?p=Cubreboca`">>&nbsp;Cubrebocas</a></li>
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                            <li><a :href="`/bprod?p=Traje`">>&nbsp;Trajes</a></li>
-                                        </v-list-item-title>
-                                    </v-list-item>
-
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                            <li><a :href="`/bprod?p=Huarache`">>&nbsp;Huaraches</a></li>
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                            <li><a :href="`/bprod?p=Tenis`">>&nbsp;Tenis</a></li>
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                </v-list-group>
-                            </v-list>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter" data-aos="fade-up" data-aos-delay="350">
-                        <h4>Suscribete</h4>
-                        <p>Para que puedas recibir ofertas, descuentos, sorpresas y mucho mas</p>
-                        <form style="color:black" action="">
-                        <input type="email" placeholder="correo@ejemplo.com" name="email"><input type="submit" value="Subscribe">
-                        </form>
-
-                    </div>
-
+                    <v-divider />
                 </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="copyright">
-                <a href="/Aviso"><strong><span>Aviso de privacidad</span></strong></a>
-                &copy; Copyright <strong><span>Indumentarias</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-
-            </div>
-        </div>
-
-    </footer>
-
-</div>
+                <v-col class="text-center" cols="12">
+                    <a href="/Aviso" style="color:black; text-decoration:none"
+                        ><strong><span>Aviso de privacidad</span></strong></a
+                    >
+                    &copy; Copyright
+                    <strong><span>Indumentarias</span></strong
+                    >. All Rights Reserved
+                </v-col>
+            </v-row>
+        </v-footer>
+    </div>
 </template>
 
 <script>
-    export default {
-        methods:{
-            cerrarSesion()
-            {
-                this.$inertia.post('/logout',{},
-                    {
-                        onFinish: () => {
-                            location.reload();
-                        }
+export default {
+    methods: {
+        cerrarSesion() {
+            this.$inertia.post(
+                "/logout",
+                {},
+                {
+                    onFinish: () => {
+                        location.reload();
                     }
-                )
-            },
+                }
+            );
         }
     }
+};
 </script>
