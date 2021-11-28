@@ -26,4 +26,19 @@ class ProductControllerApi extends Controller
             ->get();
         return $pa;
     }
+    public function filterProd(Request $request)
+    {
+        $pa = tblproductos::where('vchTalla', '=', $request->extra_chica)
+            ->orWhere('vchTalla', '=', $request->chica)
+            ->orWhere('vchTalla', '=', $request->mediana)
+            ->orWhere('vchTalla', '=', $request->grande)
+            ->get();
+        return $pa;
+    }
+    public function IDProducto()
+    {
+        $pa = tblproductos::select('intIDProd')
+            ->get();
+        return $pa;
+    }
 }

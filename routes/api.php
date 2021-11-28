@@ -22,6 +22,9 @@ Route::post('/product', 'App\Http\Controllers\ProductControllerApi@buscarProd');
 Route::post('/orders', 'App\Http\Controllers\OrdersControllerApi@Orders');
 Route::get('/orders', 'App\Http\Controllers\OrdersControllerApi@index');
 Route::get('/order', 'App\Http\Controllers\OrdersControllerApi@order');
+Route::post('/filter', 'App\Http\Controllers\ProductControllerApi@filterProd');
+Route::get('/idProduct', 'App\Http\Controllers\ProductControllerApi@IDProducto');
+
 
 ///Facturacion
 Route::post('/invoice', 'App\Http\Controllers\InvoiceController@facturar');
